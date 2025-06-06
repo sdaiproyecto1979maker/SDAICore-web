@@ -19,7 +19,7 @@ import sdai.com.sis.validaciones.ExcepcionIntegridad;
 /**
  * @date 04/06/2025
  * @author Sergio_M
- * @since VERSIONDCOREENCURSO
+ * @since 0.0.0.0-RELEASE
  */
 public abstract class BeanGestor implements Serializable {
 

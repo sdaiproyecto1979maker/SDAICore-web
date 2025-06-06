@@ -13,7 +13,7 @@ import sdai.com.sis.validaciones.GrupoSize;
 /**
  * @date 29/05/2025
  * @author Sergio_M
- * @since VERSIONDCOREENCURSO
+ * @since 0.0.0.0-RELEASE
  */
 @Named
 @ViewScoped

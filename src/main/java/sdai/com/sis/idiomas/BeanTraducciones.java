@@ -11,7 +11,7 @@ import org.primefaces.component.outputlabel.OutputLabel;
 /**
  * @date 04/06/2025
  * @author Sergio_M
- * @since VERSIONDCOREENCURSO
+ * @since 0.0.0.0-RELEASE
  */
 @Named
 @ViewScoped
