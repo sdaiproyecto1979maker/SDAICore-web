@@ -1,0 +1,86 @@
+body {
+    background: #ccffcc;
+}
+
+.capa_pagina {
+    position: absolute;
+    width: 98%;
+    height: 98%;
+    top: 1%;
+    left: 1%;
+    border: 1px white inset;
+    background: white;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.imagen_login {
+    position: relative;
+    width: 50%;
+    height: 99%;
+    align-content: center;
+    background-image: url(../imagenes/login.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 5px;
+    left: 5px;
+}
+
+.capaIdioma {
+    position: absolute;
+    width: 100%;
+    height: 5%;
+    top: 0%;
+    left: 0%;
+    border-bottom: 1px black solid;
+    display: flex;
+}
+
+.capaVersiones {
+    position: absolute;
+    width: 100%;
+    height: 3%;
+    top: 97%;
+    left: 0%;
+    border-top: 1px black solid;
+    font-size: small;
+    display: flex;
+}
+
+.capaLogin {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;    
+}
+
+.panelLogin {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    top: 35%;
+    left: 50%;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 1rem;
+    background: #cccccc;
+}
+
+body .ui-dialog.ui-message-dialog .ui-dialog-content > span.ui-dialog-message.ui-messages-error-icon {
+    color: red;
+}
+
+.destacado {
+    color: red;
+}
+
+.indent30px {
+    text-indent: 30px;
+}
+
+.centrado {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}

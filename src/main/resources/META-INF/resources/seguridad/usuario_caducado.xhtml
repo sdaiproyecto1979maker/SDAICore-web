@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="jakarta.faces.html">
+    <h:head>
+        <title>#{beanSistema.nombreDSistema}</title>
+        <link href="#{beanSistema.pathEstilosCSS}" rel="stylesheet" type="text/css"></link>
+    </h:head>
+    <h:body>
+        <h:form id="formDatos">
+            <div class="capaLogin">
+                <p:panel id="PANEWSECRE" header="#{beanTraducciones.traduccion}" class="panelLogin">
+                    <h:panelGrid columns="3">
+                        <span class="destacado">* </span>
+                        <p:outputLabel for="CODIGUSUAR" value="#{beanTraducciones.traduccionLabel}">: </p:outputLabel>
+                        <p:inputText id="CODIGUSUAR" value="#{beanUsuario.codigoDUsuario}"></p:inputText>
+                        <span class="destacado">* </span>
+                        <p:outputLabel for="PASSWUSUAR" value="#{beanTraducciones.traduccionLabel}">: </p:outputLabel>
+                        <p:password id="PASSWUSUAR" value="#{beanUsuario.passwordDUsuario}"></p:password>                        
+                        <span class="destacado">* </span>
+                        <p:outputLabel for="PASSRUSUAR" value="#{beanTraducciones.traduccionLabel}">: </p:outputLabel>
+                        <p:password id="PASSRUSUAR" value="#{beanUsuario.passwordRUsuario}"></p:password>                        
+                    </h:panelGrid>
+                    <h:panelGrid columns="1">
+                        <p:commandButton id="BTNACEPTAR" value="#{beanTraducciones.traduccion}" action="#{beanLogin.newClave}" ajax="false"></p:commandButton>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+        </h:form>
+    </h:body>
+</html>

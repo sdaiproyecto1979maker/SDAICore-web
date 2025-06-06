@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">    
+    <h:body>
+        <h:panelGrid columns="2">
+            <p:outputLabel for="CODIIDIOMA" value="#{beanTraducciones.traduccionLabel}">: </p:outputLabel>
+            <p:selectOneMenu id="CODIIDIOMA" value="#{beanPaginas.codigoDIdioma}" rendered="#{beanPaginas.mostrarListaDIdiomas}" >
+                <f:selectItems value="#{beanPaginas.listaDIdiomas}"></f:selectItems>               
+                <p:ajax event="change" listener="#{beanPaginas.cargarIdioma}" update="@form"></p:ajax>
+            </p:selectOneMenu>
+        </h:panelGrid>
+        <p:panel id="PANELLOGIN" header="#{beanTraducciones.traduccion}" class="panelLogin">
+            <h:panelGrid columns="3">
+                <span class="destacado">* </span>
+                <p:outputLabel for="CODIGUSUAR" value="#{beanTraducciones.traduccionLabel}">: </p:outputLabel>
+                <p:inputText id="CODIGUSUAR" value="#{beanUsuario.codigoDUsuario}"></p:inputText>
+                <span class="destacado">* </span>
+                <p:outputLabel for="PASSWUSUAR" value="#{beanTraducciones.traduccionLabel}">: </p:outputLabel>
+                <p:password id="PASSWUSUAR" value="#{beanUsuario.passwordDUsuario}"></p:password>
+            </h:panelGrid>
+            <h:panelGrid columns="1">
+                <p:commandButton id="BTONENTRAR" value="#{beanTraducciones.traduccion}" action="#{beanLogin.login}" ajax="false"></p:commandButton>
+            </h:panelGrid>
+        </p:panel>
+    </h:body>
+</html>
