@@ -8,7 +8,7 @@ import sdai.com.sis.sistema.BeanGestor;
 /**
  * @date 29/05/2025
  * @author Sergio_M
- * @since VERSIONDCOREENCURSO
+ * @since 0.0.0.0-RELEASE
  */
 @Named
 @ViewScoped

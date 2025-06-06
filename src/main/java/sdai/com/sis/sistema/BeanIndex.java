@@ -12,7 +12,7 @@ import sdai.com.sis.utilidades.FacesUtil;
 /**
  * @date 29/05/2025
  * @author Sergio_M
- * @since VERSIONDCOREENCURSO
+ * @since 0.0.0.0-RELEASE
  */
 @Named
 @RequestScoped

@@ -17,7 +17,7 @@ import sdai.com.sis.sesionesdusuario.ISesionRegistrada;
 /**
  * @date 30/05/2025
  * @author Sergio_M
- * @since VERSIONDCOREENCURSO
+ * @since 0.0.0.0-RELEASE
  */
 @Named
 @ViewScoped
