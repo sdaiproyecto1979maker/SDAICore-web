@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:p="http://primefaces.org/ui">    
+    <h:body>
+        <div class="capaFechaCabecera">
+            <p:outputLabel value="#{beanPaginas.fechaDSistema}"></p:outputLabel>
+        </div>
+        <div class="capaUsuarioCabecera">
+            <span style="font-weight: bold;">Usuario: </span>            
+        </div>
+        <div class="capaBotonDesconectar">
+            <p:commandButton id="cerrar" icon="pi pi-power-off" action="#{beanPaginas.cerrarSession}" ajax="false" style="background: #990033; border: 1px solid #990033;"></p:commandButton>
+        </div>
+    </h:body>
+</html>

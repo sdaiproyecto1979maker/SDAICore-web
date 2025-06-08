@@ -6,7 +6,7 @@
       xmlns:f="jakarta.faces.core">    
     <h:body>
         <h:panelGrid columns="2" class="capaIdioma">
-            <p:outputLabel for="CODIIDIOMA" value="#{beanTraducciones.traduccionLabel}">: </p:outputLabel>
+            <p:outputLabel for="CODIIDIOMA" value="#{beanTraducciones.traduccionLabel}" style="color: black;">: </p:outputLabel>
             <p:selectOneMenu id="CODIIDIOMA" value="#{beanPaginas.codigoDIdioma}" rendered="#{beanPaginas.mostrarListaDIdiomas}" >
                 <f:selectItems value="#{beanPaginas.listaDIdiomas}"></f:selectItems>               
                 <p:ajax event="change" listener="#{beanPaginas.cargarIdioma}" update="@form"></p:ajax>
