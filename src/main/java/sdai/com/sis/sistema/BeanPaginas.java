@@ -8,6 +8,8 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.primefaces.event.MenuActionEvent;
+import org.primefaces.model.menu.MenuModel;
 import sdai.com.sis.cfg.ISdaiCFG;
 import sdai.com.sis.idiomas.IIdioma;
 import sdai.com.sis.idiomas.IIdiomas;
@@ -87,6 +89,16 @@ public class BeanPaginas implements Serializable {
 
     public void cerrarSession() throws Exception {
         this.sesionRegistrada.cerrarSession();
+    }
+
+    public MenuModel getMenuDProceso() throws Exception {
+        String codigoDProceso = this.gestorDProcesos.getCodigoDProceso();
+        MenuModel menuModel = this.sesionRegistrada.getMenuDProceso(codigoDProceso);
+        return menuModel;
+    }
+    
+    public void tratarItemMenu(MenuActionEvent event) {
+        
     }
 
     public boolean isMostrarListaDIdiomas() {
