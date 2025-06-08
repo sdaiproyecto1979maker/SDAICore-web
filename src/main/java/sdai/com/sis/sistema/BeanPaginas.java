@@ -13,6 +13,7 @@ import sdai.com.sis.idiomas.IIdioma;
 import sdai.com.sis.idiomas.IIdiomas;
 import sdai.com.sis.procesosdsesion.IGestorDProcesos;
 import sdai.com.sis.sesionesdusuario.ISesionRegistrada;
+import sdai.com.sis.utilidades.Fecha;
 
 /**
  * @date 30/05/2025
@@ -76,6 +77,16 @@ public class BeanPaginas implements Serializable {
         stringBuilder.append("Versión Custom: ");
         stringBuilder.append(this.sdaiCFG.getVersionCustom().getVersion());
         return stringBuilder.toString();
+    }
+
+    public String getFechaDSistema() {
+        Fecha fechaDSistema = Fecha.getFechaDSistema();
+        String cadena = fechaDSistema.toChar();
+        return cadena;
+    }
+
+    public void cerrarSession() throws Exception {
+        this.sesionRegistrada.cerrarSession();
     }
 
     public boolean isMostrarListaDIdiomas() {
