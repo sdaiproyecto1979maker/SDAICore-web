@@ -153,12 +153,12 @@ body .ui-button {
 }
 
 body .ui-menu {
-    background: transparent !important;
+    background: transparent;
     border: none;
 }
 
 body .ui-menu .ui-menu-list .ui-widget-header {
-    background: transparent !important;
+    background: transparent;
 }
 
 body .ui-menu .ui-menu-list .ui-widget-header h3 {
