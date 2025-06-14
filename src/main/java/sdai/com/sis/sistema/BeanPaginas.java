@@ -99,6 +99,17 @@ public class BeanPaginas implements Serializable {
         return menuModel;
     }
 
+    public MenuModel getBarraDMenu() throws Exception {
+        ProcesoDSesionLocal procesoDSesionLocal = this.gestorDProcesos.getProcesoDSesionLocal();
+        String barraDMenu = procesoDSesionLocal.getCodigoDBarraDMenu();
+        MenuModel menuModel = this.sesionRegistrada.getBarraDMenu(barraDMenu);
+        return menuModel;
+    }
+
+    public boolean isMostrarBarraDMenu() throws Exception {
+        return getBarraDMenu() != null;
+    }
+
     public void tratarItemMenu(MenuActionEvent event) {
 
     }

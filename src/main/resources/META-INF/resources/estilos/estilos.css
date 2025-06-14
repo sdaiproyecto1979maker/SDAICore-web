@@ -164,3 +164,10 @@ body .ui-menu .ui-menu-list .ui-widget-header {
 body .ui-menu .ui-menu-list .ui-widget-header h3 {
     color: white;
 }
+
+.capaBarraMenu {
+    position: relative;
+    width: 90%;
+    top: 5%;
+    left: 5%;
+}
