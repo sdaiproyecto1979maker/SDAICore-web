@@ -3,38 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
       xmlns:f="jakarta.faces.core"
-      xmlns:ui="jakarta.faces.facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:ui="jakarta.faces.facelets">
     <h:head>
         <title>#{beanSistema.nombreDSistema}</title>
-        <link href="#{beanSistema.pathEstilosCSS}" rel="stylesheet" type="text/css"></link>
-        <style>
-            body {
-                margin: 0;
-                font-family: Arial;
-                overflow: hidden;
-            }
-            .cabecera {
-                background: #eeeeee00;
-                padding: 10px;
-                text-align: center;
-            }
-            .contenedor {
-                display: flex;
-                height: 100vh;
-            }
-            .menu {
-                background: #eeeeee00;
-                width: 250px;
-                padding: 10px;
-                height: 792px;
-            }
-            .contenido {
-                flex: 1;
-                padding: 20px;
-                height: 792px;
-            }
-        </style>
+        <link href="#{beanSistema.pathEstilosCSS}" rel="stylesheet" type="text/css"></link>        
     </h:head>
     <h:body>
         <f:metadata>
@@ -42,35 +14,14 @@
         </f:metadata>        
         <h:form id="formDatos">
             <div class="cabecera">
-                <ui:insert name="cabecera">
-                    <h1>Mi Sitio Web</h1>
-                </ui:insert>
+                <ui:include src="cabecera.xhtml"></ui:include>
             </div>
-            <div class="contenedor">
-                <div class="menu">
-                    <ui:insert name="menu">
-                        <!-- Menú por defecto -->
-                        <h:link outcome="inicio" value="Inicio" /><br/>
-                        <h:link outcome="pagina2" value="Página 2" /><br/>
-                        <h:link outcome="pagina3" value="Página 3" />
-                    </ui:insert>
-                </div>
-
-                <div class="contenido">
-                    <ui:include src="#{beanPaginas.pagina}"></ui:include>
-                </div>
-            </div>            
+            <div class="menu">
+                <ui:include src="menu.xhtml"></ui:include>
+            </div>
+            <div class="ventana">
+                <ui:include src="#{beanPaginas.pagina}"></ui:include>
+            </div>
         </h:form>
-        <div class="capaVersiones">
-            <div style="flex: 1; text-align: left;">
-                <p:outputLabel value="#{beanPaginas.versionDFramework}"></p:outputLabel>
-            </div>
-            <div style="flex: 1; text-align: center;">
-                <p:outputLabel value="#{beanPaginas.versionCustom}"></p:outputLabel>
-            </div>
-            <div style="flex: 1; text-align: right;">
-                <p:outputLabel value="#{beanPaginas.versionDCore}"></p:outputLabel>
-            </div>
-        </div>
     </h:body>
 </html>

@@ -4,8 +4,11 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import sdai.com.sis.cachesdsistema.IGlobalCaches;
 import sdai.com.sis.logs.LogDSistema;
 import sdai.com.sis.procesosdsesion.IGestorDProcesos;
+import sdai.com.sis.procesosdsesion.rednodal.ProcesoDSesionLocal;
+import sdai.com.sis.procesosdsesion.rednodal.ProcesosDSesionLocal;
 import sdai.com.sis.sesionesdusuario.ISesionRegistrada;
 import sdai.com.sis.utilidades.FacesUtil;
 
@@ -17,7 +20,7 @@ import sdai.com.sis.utilidades.FacesUtil;
 @Named
 @RequestScoped
 public class BeanIndex {
-    
+
     @Inject
     private ArranqueDSistema arranqueDSistema;
     @Inject
@@ -27,8 +30,12 @@ public class BeanIndex {
     @Inject
     private IAtributosDSistema atributosDSistema;
     @Inject
+    private IGlobalCaches globalCaches;
+    @Inject
+    private ProcesosDSesionLocal procesosDSesionLocal;
+    @Inject
     private IGestorDProcesos gestorDProcesos;
-    
+
     @PostConstruct
     public void init() {
         try {
@@ -38,16 +45,18 @@ public class BeanIndex {
                 String log = this.sesionRegistrada.generarLogDSistema();
                 this.logDSistema.writeMSG(log);
             }
+            this.globalCaches.iniciarContenedores();
             String codigoDProceso = this.atributosDSistema.getValorDAtributoString(KSistema.AtributosDSistema.Atributos.PROCINICIO);
-            this.gestorDProcesos.setCodigoDProceso(codigoDProceso);
+            ProcesoDSesionLocal procesoDSesionLocal = this.procesosDSesionLocal.getInstancia(codigoDProceso);
+            this.gestorDProcesos.iniciar(procesoDSesionLocal);
             FacesUtil.dispath("/pagina.xhtml");
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
-    
+
     public String getIndex() {
         return "";
     }
-    
+
 }

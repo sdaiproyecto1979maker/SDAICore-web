@@ -13,6 +13,8 @@ import sdai.com.sis.excepciones.UsuarioCaducado;
 import sdai.com.sis.idiomas.TraductorDExcepciones;
 import sdai.com.sis.procesosdsesion.IGestorDProcesos;
 import sdai.com.sis.procesosdsesion.KProcesosDSesion;
+import sdai.com.sis.procesosdsesion.rednodal.ProcesoDSesionLocal;
+import sdai.com.sis.procesosdsesion.rednodal.ProcesosDSesionLocal;
 import sdai.com.sis.utilidades.Util;
 import sdai.com.sis.validaciones.ExcepcionIntegridad;
 
@@ -24,6 +26,8 @@ import sdai.com.sis.validaciones.ExcepcionIntegridad;
 public abstract class BeanGestor implements Serializable {
 
     @Inject
+    private ProcesosDSesionLocal procesosDSesionLocal;
+    @Inject
     private IGestorDProcesos gestorDProcesos;
     @Inject
     private TraductorDExcepciones traductorDExcepciones;
@@ -31,8 +35,12 @@ public abstract class BeanGestor implements Serializable {
     public String procesarAccion(String codigoDAccion) {
         try {
             String codigoDProceso = this.gestorDProcesos.procesarAccion(codigoDAccion);
-            this.gestorDProcesos.setCodigoDProceso(codigoDProceso);
-            return "/pagina_menu.xhtml";
+            if (Util.isCadenaNoVacia(codigoDProceso)) {
+                ProcesoDSesionLocal procesoDSesionLocal = this.procesosDSesionLocal.getInstancia(codigoDProceso);
+                this.gestorDProcesos.iniciar(procesoDSesionLocal);
+                return "/pagina_menu.xhtml";
+            }
+            return "";
         } catch (ExcepcionIntegridad ex) {
             StringBuilder stringBuilder = new StringBuilder();
             List<ConstraintViolation<Object>> errores = ex.getErrores();
@@ -46,7 +54,8 @@ public abstract class BeanGestor implements Serializable {
             PrimeFaces.current().dialog().showMessageDynamic(facesMessage, true);
             return "";
         } catch (UsuarioCaducado usuarioCaducado) {
-            this.gestorDProcesos.setCodigoDProceso(KProcesosDSesion.ProcesosDSesion.PRNEWSECRE);
+            ProcesoDSesionLocal procesoDSesionLocal = this.procesosDSesionLocal.getInstancia(KProcesosDSesion.ProcesosDSesion.PRNEWSECRE);
+            this.gestorDProcesos.iniciar(procesoDSesionLocal);
             return "/pagina.xhtml";
         } catch (ErrorGeneral ex) {
             String codigo = ex.getCodigoDError();

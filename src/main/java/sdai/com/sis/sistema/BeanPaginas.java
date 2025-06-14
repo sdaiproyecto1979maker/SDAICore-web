@@ -8,11 +8,15 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.primefaces.event.MenuActionEvent;
+import org.primefaces.model.menu.MenuModel;
 import sdai.com.sis.cfg.ISdaiCFG;
 import sdai.com.sis.idiomas.IIdioma;
 import sdai.com.sis.idiomas.IIdiomas;
 import sdai.com.sis.procesosdsesion.IGestorDProcesos;
+import sdai.com.sis.procesosdsesion.rednodal.ProcesoDSesionLocal;
 import sdai.com.sis.sesionesdusuario.ISesionRegistrada;
+import sdai.com.sis.utilidades.Fecha;
 
 /**
  * @date 30/05/2025
@@ -78,12 +82,33 @@ public class BeanPaginas implements Serializable {
         return stringBuilder.toString();
     }
 
+    public String getFechaDSistema() {
+        Fecha fechaDSistema = Fecha.getFechaDSistema();
+        String cadena = fechaDSistema.toChar();
+        return cadena;
+    }
+
+    public void cerrarSession() throws Exception {
+        this.sesionRegistrada.cerrarSession();
+    }
+
+    public MenuModel getMenuDProceso() throws Exception {
+        ProcesoDSesionLocal procesoDSesionLocal = this.gestorDProcesos.getProcesoDSesionLocal();
+        String codigoDMenu = procesoDSesionLocal.getCodigoDMenuDProceso();
+        MenuModel menuModel = this.sesionRegistrada.getMenuDProceso(codigoDMenu);
+        return menuModel;
+    }
+
+    public void tratarItemMenu(MenuActionEvent event) {
+
+    }
+
     public boolean isMostrarListaDIdiomas() {
         return this.idiomas.getIdiomasDSistema().length > 1;
     }
 
     public void loadGestor() {
-        this.gestorDProcesos.iniciar();
+        this.gestorDProcesos.loadDatosIniciales();
     }
 
     public String getPagina() {

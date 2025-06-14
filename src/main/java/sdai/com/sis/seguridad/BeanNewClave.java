@@ -17,7 +17,7 @@ import sdai.com.sis.validaciones.GrupoSize;
  */
 @Named
 @ViewScoped
-public class BeanUsuario implements IBeanDDatos, Serializable {
+public class BeanNewClave implements IBeanDDatos, Serializable {
 
     @NotBlank(message = "SEGUR00000", groups = GrupoNotBlank.class)
     @Size(min = 3, max = 45, message = "SEGUR00001", groups = GrupoSize.class)
@@ -25,11 +25,15 @@ public class BeanUsuario implements IBeanDDatos, Serializable {
     @NotBlank(message = "SEGUR00002", groups = GrupoNotBlank.class)
     @Size(min = 3, message = "SEGUR00003", groups = GrupoSize.class)
     private String passwordDUsuario;
+    @NotBlank(message = "SEGUR00006", groups = GrupoNotBlank.class)
+    @Size(min = 3, message = "SEGUR00007", groups = GrupoSize.class)
+    private String passwordRUsuario;
 
     @Override
     public void loadDSEntidad(IDSEntidad dsEntidad) {
         dsEntidad.addDato(KSeguridad.Usuarios.AtributosDEntidad.CODIGUSUAR, getCodigoDUsuario());
         dsEntidad.addDato(KSeguridad.SecretosDUsuario.AtributosDEntidad.PASSWUSUAR, getPasswordDUsuario());
+        dsEntidad.addDato(KSeguridad.SecretosDUsuario.PASSRUSUAR, getPasswordRUsuario());
     }
 
     public String getCodigoDUsuario() {
@@ -46,6 +50,14 @@ public class BeanUsuario implements IBeanDDatos, Serializable {
 
     public void setPasswordDUsuario(String passwordDUsuario) {
         this.passwordDUsuario = passwordDUsuario;
+    }
+
+    public String getPasswordRUsuario() {
+        return passwordRUsuario;
+    }
+
+    public void setPasswordRUsuario(String passwordRUsuario) {
+        this.passwordRUsuario = passwordRUsuario;
     }
 
 }
