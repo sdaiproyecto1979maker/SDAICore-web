@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html"
       xmlns:f="jakarta.faces.core"
-      xmlns:ui="jakarta.faces.facelets">
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>#{beanSistema.nombreDSistema}</title>
         <link href="#{beanSistema.pathEstilosCSS}" rel="stylesheet" type="text/css"></link>        
@@ -20,6 +21,7 @@
                 <ui:include src="menu.xhtml"></ui:include>
             </div>
             <div class="ventana">
+                <p:menubar id="menuBar" model="#{beanPaginas.barraDMenu}" rendered="#{beanPaginas.mostrarBarraDMenu}" class="capaBarraMenu"></p:menubar>
                 <ui:include src="#{beanPaginas.pagina}"></ui:include>
             </div>
         </h:form>
