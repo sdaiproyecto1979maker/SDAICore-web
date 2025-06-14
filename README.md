@@ -1,5 +1,8 @@
 # SDAICore-web
 
+## VERSIONDCOREENCURSO
+* Tratar acción sobre el item de menu
+
 ## 1.0.0.0-RELEASE
 * Creación de la plantilla de pagina con menu
 * Carga dinamica del menu de proceso
