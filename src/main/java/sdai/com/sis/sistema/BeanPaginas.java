@@ -14,6 +14,7 @@ import sdai.com.sis.cfg.ISdaiCFG;
 import sdai.com.sis.idiomas.IIdioma;
 import sdai.com.sis.idiomas.IIdiomas;
 import sdai.com.sis.procesosdsesion.IGestorDProcesos;
+import sdai.com.sis.procesosdsesion.rednodal.ProcesoDSesionLocal;
 import sdai.com.sis.sesionesdusuario.ISesionRegistrada;
 import sdai.com.sis.utilidades.Fecha;
 
@@ -92,13 +93,14 @@ public class BeanPaginas implements Serializable {
     }
 
     public MenuModel getMenuDProceso() throws Exception {
-        String codigoDProceso = this.gestorDProcesos.getCodigoDProceso();
-        MenuModel menuModel = this.sesionRegistrada.getMenuDProceso(codigoDProceso);
+        ProcesoDSesionLocal procesoDSesionLocal = this.gestorDProcesos.getProcesoDSesionLocal();
+        String codigoDMenu = procesoDSesionLocal.getCodigoDMenuDProceso();
+        MenuModel menuModel = this.sesionRegistrada.getMenuDProceso(codigoDMenu);
         return menuModel;
     }
-    
+
     public void tratarItemMenu(MenuActionEvent event) {
-        
+
     }
 
     public boolean isMostrarListaDIdiomas() {
@@ -106,7 +108,7 @@ public class BeanPaginas implements Serializable {
     }
 
     public void loadGestor() {
-        this.gestorDProcesos.iniciar();
+        this.gestorDProcesos.loadDatosIniciales();
     }
 
     public String getPagina() {
