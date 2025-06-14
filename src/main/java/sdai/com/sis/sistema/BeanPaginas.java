@@ -9,13 +9,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.primefaces.event.MenuActionEvent;
+import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.MenuModel;
 import sdai.com.sis.cfg.ISdaiCFG;
 import sdai.com.sis.idiomas.IIdioma;
 import sdai.com.sis.idiomas.IIdiomas;
 import sdai.com.sis.procesosdsesion.IGestorDProcesos;
 import sdai.com.sis.procesosdsesion.rednodal.ProcesoDSesionLocal;
+import sdai.com.sis.procesosdsesion.rednodal.ProcesosDSesionLocal;
+import sdai.com.sis.seguridad.menusdsistema.rednodal.ItemDMenuLocal;
 import sdai.com.sis.sesionesdusuario.ISesionRegistrada;
+import sdai.com.sis.utilidades.FacesUtil;
 import sdai.com.sis.utilidades.Fecha;
 
 /**
@@ -26,7 +30,7 @@ import sdai.com.sis.utilidades.Fecha;
 @Named
 @ViewScoped
 public class BeanPaginas implements Serializable {
-
+    
     @Inject
     private IGestorDProcesos gestorDProcesos;
     @Inject
@@ -36,7 +40,9 @@ public class BeanPaginas implements Serializable {
     private ISesionRegistrada sesionRegistrada;
     @Inject
     private ISdaiCFG sdaiCFG;
-
+    @Inject
+    private ProcesosDSesionLocal procesosDSesionLocal;
+    
     @PostConstruct
     public void init() {
         IIdioma idioma = this.sesionRegistrada.getIdiomaDSesion();
@@ -45,7 +51,7 @@ public class BeanPaginas implements Serializable {
         }
         this.codigoDIdioma = idioma.getCodigoDIdioma();
     }
-
+    
     public List<SelectItem> getListaDIdiomas() {
         List<SelectItem> lista = new ArrayList<>();
         IIdioma[] _idiomas = this.idiomas.getIdiomasDSistema();
@@ -54,73 +60,78 @@ public class BeanPaginas implements Serializable {
         }
         return lista;
     }
-
+    
     public void cargarIdioma() {
         String codigo = getCodigoDIdioma();
         IIdioma idioma = this.idiomas.getIdioma(codigo);
         this.sesionRegistrada.setIdiomaDSesion(idioma);
     }
-
+    
     public String getVersionDCore() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Versión Core: ");
         stringBuilder.append(this.sdaiCFG.getVersionDCore().getVersion());
         return stringBuilder.toString();
     }
-
+    
     public String getVersionDFramework() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Versión Framework: ");
         stringBuilder.append(this.sdaiCFG.getVersionDFramework().getVersion());
         return stringBuilder.toString();
     }
-
+    
     public String getVersionCustom() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Versión Custom: ");
         stringBuilder.append(this.sdaiCFG.getVersionCustom().getVersion());
         return stringBuilder.toString();
     }
-
+    
     public String getFechaDSistema() {
         Fecha fechaDSistema = Fecha.getFechaDSistema();
         String cadena = fechaDSistema.toChar();
         return cadena;
     }
-
+    
     public void cerrarSession() throws Exception {
         this.sesionRegistrada.cerrarSession();
     }
-
+    
     public MenuModel getMenuDProceso() throws Exception {
         ProcesoDSesionLocal procesoDSesionLocal = this.gestorDProcesos.getProcesoDSesionLocal();
         String codigoDMenu = procesoDSesionLocal.getCodigoDMenuDProceso();
         MenuModel menuModel = this.sesionRegistrada.getMenuDProceso(codigoDMenu);
         return menuModel;
     }
-
-    public void tratarItemMenu(MenuActionEvent event) {
-
+    
+    public void tratarItemMenu(MenuActionEvent event) throws Exception {
+        MenuItem menuItem = event.getMenuItem();
+        ItemDMenuLocal itemDMenuLocal = (ItemDMenuLocal) menuItem.getValue();
+        String codigoDProceso = itemDMenuLocal.getProcesoDestino();
+        ProcesoDSesionLocal procesoDSesionLocal = this.procesosDSesionLocal.getInstancia(codigoDProceso);
+        this.gestorDProcesos.iniciar(procesoDSesionLocal);
+        FacesUtil.dispath("/pagina_menu.xhtml");
     }
-
+    
     public boolean isMostrarListaDIdiomas() {
         return this.idiomas.getIdiomasDSistema().length > 1;
     }
-
+    
     public void loadGestor() {
         this.gestorDProcesos.loadDatosIniciales();
     }
-
+    
     public String getPagina() {
         return this.gestorDProcesos.getPaginaDProceso();
     }
-
+    
     public String getCodigoDIdioma() {
         return codigoDIdioma;
     }
-
+    
     public void setCodigoDIdioma(String codigoDIdioma) {
         this.codigoDIdioma = codigoDIdioma;
     }
-
+    
 }
